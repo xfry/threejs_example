@@ -1,6 +1,6 @@
 # ignore all logs
 *.log
 # modules and libs
-node_modules
-libs
+**/node_modules
+**/libs
 package-lock.json
