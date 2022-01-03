@@ -29,4 +29,14 @@ Camera.position.z = 3;
 Scene.add(Camera);
 Scene.add(cubeMesh);
 Renderer.setSize(settings.width, settings.height);
-Renderer.render(Scene, Camera);
+
+let Animate = () => {
+  requestAnimationFrame(Animate);
+  Renderer.render(Scene, Camera);
+
+  cubeMesh.rotation.x +=0.005;
+  cubeMesh.rotation.y +=0.005;
+
+};
+
+Animate();
