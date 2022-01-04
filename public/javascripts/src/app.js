@@ -14,7 +14,7 @@ let settings = {
   fov: 45,
 };
 settings.aspect = (settings.width/settings.height);
-
+// Adding three new cubes
 const Scene = new THREE.Scene();
 let cube1 = new THREE.Mesh(
   new THREE.BoxGeometry(1,1,1),
@@ -36,6 +36,12 @@ let cube3 = new THREE.Mesh(
 
 cube3.position.x = 1;
 
+// Adding transforms
+cube1.scale.y = cube1.scale.y * 0.5;
+cube2.scale.y = cube2.scale.y * 0.4;
+cube3.scale.y = cube3.scale.y * 0.3;
+
+//creating the group
 let MeshGroup = new THREE.Group();
 MeshGroup.add(cube1);
 MeshGroup.add(cube2);
