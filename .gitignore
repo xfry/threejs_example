@@ -2,6 +2,6 @@
 *.log
 # modules and libs
 /node_modules
-/public/dist/bundle.js
+/dist/bundle.js
 /libs
 package-lock.json
