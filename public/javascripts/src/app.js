@@ -16,27 +16,43 @@ let settings = {
 settings.aspect = (settings.width/settings.height);
 
 const Scene = new THREE.Scene();
-const cubeGeo = new THREE.BoxGeometry(1,1,1);
-const cubeMat = new THREE.MeshBasicMaterial({
-  color: 0x0ff0000,
-});
+let cube1 = new THREE.Mesh(
+  new THREE.BoxGeometry(1,1,1),
+  new THREE.MeshBasicMaterial({color: 0xff0000})
+);
 
-let cubeMesh = new THREE.Mesh(cubeGeo, cubeMat);
+
+let cube2 = new THREE.Mesh(
+  new THREE.BoxGeometry(1,1,1),
+  new THREE.MeshBasicMaterial({color: 0xffff00})
+);
+
+cube2.position.x = -1;
+
+let cube3 = new THREE.Mesh(
+  new THREE.BoxGeometry(1,1,1),
+  new THREE.MeshBasicMaterial({color: 0x000fff})
+);
+
+cube3.position.x = 1;
+
+let MeshGroup = new THREE.Group();
+MeshGroup.add(cube1);
+MeshGroup.add(cube2);
+MeshGroup.add(cube3);
 
 const Camera = new THREE.PerspectiveCamera( settings.fov, settings.aspect, settings.near, settings.far);
 Camera.position.z = 3;
 
 Scene.add(Camera);
-Scene.add(cubeMesh);
+Scene.add(MeshGroup);
+
 Renderer.setSize(settings.width, settings.height);
 
 let Animate = () => {
   requestAnimationFrame(Animate);
   Renderer.render(Scene, Camera);
-
-  cubeMesh.rotation.x +=0.005;
-  cubeMesh.rotation.y +=0.005;
-
+  MeshGroup.rotation.y += 0.002;
 };
 
 Animate();
