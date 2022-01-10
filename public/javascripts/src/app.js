@@ -57,7 +57,6 @@ Renderer.setSize(settings.width, settings.height);
 
 // Animation main loop.
 let Animate = () => {
-  requestAnimationFrame(Animate);
   Renderer.render(Scene, Camera);
   // Rotation transforms.
   cube1.rotation.z += 0.02;
@@ -69,6 +68,7 @@ let Animate = () => {
   
   // Rotate the whole group
   MeshGroup.rotation.y += 0.002;
+  requestAnimationFrame(Animate);
 };
 
 Animate();
