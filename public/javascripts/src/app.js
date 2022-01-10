@@ -1,4 +1,8 @@
 import * as THREE from "three";
+import gsap from "gsap";
+
+//create a timeline for handling animation tween.
+let tl = gsap.timeline();
 
 const canvas = document.querySelector("canvas.webgl");
 const Renderer = new THREE.WebGLRenderer({
@@ -36,16 +40,18 @@ let cube3 = new THREE.Mesh(
 
 cube3.position.x = 1;
 
-// Adding transforms
-cube1.scale.y = cube1.scale.y * 0.5;
-cube2.scale.y = cube2.scale.y * 0.4;
-cube3.scale.y = cube3.scale.y * 0.3;
 
 //creating the group
 let MeshGroup = new THREE.Group();
 MeshGroup.add(cube1);
 MeshGroup.add(cube2);
 MeshGroup.add(cube3);
+
+// Adding transforms with gsap timeline tool
+tl.to(cube1.scale, {y: 0.5, duration: 1, ease: "back"})
+  .to(cube2.scale, {y: 0.4, duration: 1, ease: "bounce"})
+  .to(cube3.scale, {y: 0.3, duration: 1, ease: "back"})
+  .from(MeshGroup.rotation, {y: 10, duration: 3, ease: "bounce"}, "<1");
 
 const Camera = new THREE.PerspectiveCamera( settings.fov, settings.aspect, settings.near, settings.far);
 Camera.position.z = 3;
@@ -55,19 +61,12 @@ Scene.add(MeshGroup);
 
 Renderer.setSize(settings.width, settings.height);
 
+
 // Animation main loop.
 let Animate = () => {
   Renderer.render(Scene, Camera);
-  // Rotation transforms.
-  cube1.rotation.z += 0.02;
-  cube1.rotation.y += 0.02;
-  cube2.rotation.x += 0.02;
-  cube2.rotation.y += 0.02;
-  cube3.rotation.x += 0.02;
-  cube3.rotation.y += 0.02;
   
   // Rotate the whole group
-  MeshGroup.rotation.y += 0.002;
   requestAnimationFrame(Animate);
 };
 
